@@ -24,9 +24,10 @@
     "no-this": true,
     "no-class": true,
     "no-mixed-interface": true,
+    "no-submodule-imports": false,
     "no-expression-statement": [
-      true,
-      { "ignore-prefix": ["console.", "process.exit"] }
+      false,
+      { "ignore-prefix": ["console.", "process.exit", "sideEffect"] }
     ],
     "no-if-statement": true
     /* end tslint-immutable rules */
