@@ -7,7 +7,7 @@
   "module": "build/module/index.js",
   "repository": "https://github.com/jerexyz/wepy-plugin-aliyun-oss",
   "license": "MIT",
-  "keywords": [],
+  "keywords": ["wepy","aliyun-oss","upload"],
   "scripts": {
     "describe": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",
@@ -32,8 +32,7 @@
     "reset": "git clean -dfx && git reset --hard && npm i",
     "clean": "trash build test",
     "all": "run-s reset test cov:check doc:html",
-    "prepare-release": "run-s all version doc:publish",
-    "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('wepy-plugin-aliyun-oss2 must be installed with Yarn: https://yarnpkg.com/')\""
+    "prepare-release": "run-s all version doc:publish"
   },
   "scripts-info": {
     "info": "Display information about the package scripts",
@@ -52,7 +51,8 @@
     "node": ">=8.9"
   },
   "dependencies": {
-    "sha.js": "^2.4.11"
+    "ali-oss": "^6.0.1",
+    "md5-file": "^4.0.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.10",
@@ -68,7 +68,6 @@
     "ts-jest": "^23.10.5",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.17.0",
-    "tslint-immutable": "^5.0.0",
     "typedoc": "^0.13.0",
     "typescript": "^3.1.6"
   },
