@@ -65,11 +65,13 @@ class FileUpload {
           bgPath = path.join(process.cwd(), bgImage);
         }
 
-        if (!fs.existsSync(bgPath)) {
-          bgName = bgImage.replace(/.svg/, '.png');
+        ['.png', '.jpg', 'jpeg'].forEach(ext => {
+          if (fs.existsSync(bgPath)) {
+            return;
+          }
+          bgName = bgImage.replace(/.(svg|png|jpg|jpeg)/, ext);
           bgPath = path.join(process.cwd(), bgName);
-          console.log(bgPath, '4444');
-        }
+        });
 
         if (debugMode) {
           console.log('bgPath:', bgPath);
