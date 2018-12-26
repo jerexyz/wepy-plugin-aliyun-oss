@@ -1,4 +1,7 @@
 # wepy-plugin-aliyun-oss
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/jerexyz/wepy-plugin-aliyun-oss.svg)](https://greenkeeper.io/)
+
 >A plugin for wepy is used to upload images to aliyun-oss
 
 ## Install
