@@ -41,7 +41,7 @@ class FileUpload {
       console.log('\nwepy-plugin-image file:', file);
     }
 
-    const reg = /\/assets\/\S+(.png|.jpeg|.svg|.jpg)/gi;
+    const reg = /\/assets\/\S+(.png|.jpeg|.svg|.jpg|.mp3)/gi;
     if (!code) {
       if (debugMode) {
         console.error('code is null');
