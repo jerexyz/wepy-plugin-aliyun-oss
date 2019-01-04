@@ -1,7 +1,15 @@
 import fs from 'fs';
+import lowdb from 'lowdb';
+import FileSync from 'lowdb/adapters/FileSync';
 import md5File from 'md5-file';
 import path from 'path';
 import OssUpload, { OssUploaderOptions } from './ossUpload';
+
+const dbFile = path.join(process.cwd(), 'assets/file.json');
+
+const adapter = new FileSync(dbFile);
+const db = lowdb(adapter);
+
 interface ApplyOptionInterface {
   code: string;
   file: string;
@@ -91,22 +99,29 @@ class FileUpload {
       });
 
       const promiseUploadList: Array<Promise<any>> = [];
-      uploadList.forEach(uploadfile => {
+      uploadList.forEach(uploadFile => {
         promiseUploadList.push(
           new Promise(resolve => {
+            const fileKey = `${this.options.oss.endpoint}.${uploadFile.bgName}`;
+            const existFileUrl = db.get(fileKey).value();
+            if (existFileUrl) {
+              resolve({ ...uploadFile, uploadUrl: existFileUrl });
+              return;
+            }
             this.driver
-              .uploader(uploadfile.bgName.replace(/\//g, '_'), uploadfile.path)
+              .uploader(uploadFile.bgName.replace(/\//g, '_'), uploadFile.path)
               .then(url => {
-                const image = uploadfile.bg;
+                const image = uploadFile.bg;
 
                 console.log(image + ' ----> ' + url, '上传到CDN成功');
+                db.set(fileKey, url).write();
                 resolve({
-                  ...uploadfile,
+                  ...uploadFile,
                   uploadUrl: url
                 });
               })
               .catch(e => {
-                console.log(e, '上传到CDN失败');
+                console.log('\u001b[31m' + e + '\u001b[39m', '上传到CDN失败');
                 resolve({});
               });
           })
