@@ -1,6 +1,6 @@
 {
   "name": "wepy-plugin-aliyun-oss",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "description": "wepy-plugin-aliyun-oss",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
